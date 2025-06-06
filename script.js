@@ -17,7 +17,7 @@ function getWeatherIcon(code) {
             return `weather/${condition}.svg`;
         }
     }
-    return "weather/unknown.svg"; // default
+    return "weather/atmosphere.svg"; // default
 }
 
 function formatDate(date) {
