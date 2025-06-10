@@ -1,69 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Weather App UI</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div class="weather-card">
-    <div class="top-section">
-      <div class="weather-main">
-        <img src="weather/cloudy.svg" alt="weather-icon" class="main-icon">
-        <div class="weather-info">
-          <p class="time">Tuesday, 11:56</p>
-          <h2 class="temp">Cloudy 10°C</h2>
-          <p class="location">Kyiv, Ukraine</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Web App</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Import Google Icon -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="main-content">
+      <header class="input-container">
+        <input class="city-input" placeholder="Search City" type="text" />
+        <button class="search-btn">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+      </header>
+
+      <section class="weather-info" style="display: none;">
+        <div class="top-section">
+          <div class="weather-main">
+            <img src="weather/clouds.svg" alt="Weather" class="weather-summary-img" />
+            <div class="weather-info-top">
+              <h5 class="current-date-txt reguler-txt">Wed, 6 July 2025</h5>
+              <div class="weather-combain">
+                <h3 class="condition-txt ">Clouds</h3>
+                <h1 class="temp-txt ">29 °C</h1>
+              </div>
+              <h4 class="country-txt reguler-txt">Jakarta</h4>
+            </div>
+          </div>
+
+          <div class="weather-conditions-container">
+            <div class="condition-item">
+              <!-- <span class="material-symbols-outlined">rainy</span> -->
+               <img src="weather-png/sunrise.png">
+              <div class="condition-info">
+                <h5 class="sunrise reguler-txt">Sunrise</h5>
+                <h5 class="reguler-txt"></h5>
+              </div>
+            </div> ----------------
+            <div class="condition-item">
+              <!-- <span class="material-symbols-outlined">rainy</span> -->
+               <img src="weather-png/sunset.png">
+              <div class="condition-info">
+                <h5 class="sunset reguler-txt">Sunset</h5>
+                <h5 class="reguler-txt"></h5>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="sun-times">
-        <span>🌅 4:53 am</span>
-        <span>15 h 32 m</span>
-        <span>🌇 8:13 pm</span>
-      </div>
-    </div>
 
-    <div class="details">
-      <span>🌧 Rain: <b>90%</b></span>
-      <span>Humidity: <b>73%</b></span>
-      <span>Wind: <b>10 km/h</b></span>
-    </div>
+        <div class="weather-conditions-container2">
+          <div class="condition-item">
+            <span class="material-symbols-outlined">nest_sunblock</span>
+            <div class="condition-info">
+              <h5 class="reguler-txt">UV Index</h5>
+              <h5 class="uv reguler-txt"></h5>
+            </div>
+          </div>
+          <div class="condition-item">
+            <span class="material-symbols-outlined">water_drop</span>
+            <div class="condition-info">
+              <h5 class="reguler-txt">Humidity</h5>
+              <h5 class="humidity reguler-txt"></h5>
+            </div>
+          </div>
+          <div class="condition-item">
+            <span class="material-symbols-outlined">air</span>
+            <div class="condition-info">
+              <h5 class="reguler-txt">Wind Speed</h5>
+              <h5 class="wind-value-text reguler-txt">2 M/s</h5>
+            </div>
+          </div>
+        </div>
 
-    <div class="forecast">
-      <div class="day-card active">
-        <p>Today</p>
-        <img src="weather/cloudy.svg" alt="">
-        <p>10° / 1°</p>
-      </div>
-      
-      <div class="day-card">
-        <p>Fri</p>
-        <img src="weather/sunny.svg" alt="">
-        <p>10° / 1°</p>
-      </div>
-      <div class="day-card">
-        <p>Sat</p>
-        <img src="weather/cloudy.svg" alt="">
-        <p>10° / 1°</p>
-      </div>
-      <div class="day-card">
-        <p>Sun</p>
-        <img src="weather/rain.svg" alt="">
-        <p>10° / 1°</p>
-      </div>
-      <div class="day-card">
-        <p>Mon</p>
-        <img src="weather/suncloud.svg" alt="">
-        <p>10° / 1°</p>
-      </div>
-      <div class="day-card">
-        <p>Mon</p>
-        <img src="weather/suncloud.svg" alt="">
-        <p>10° / 1°</p>
-      </div>
-    </div>
-  </div>
-</body>
+        <div id="card-container" class="forecast-items-container">
+          <div class="forecast-item">
+            <h5 class="forecast-item-date reguler-txt">5 July</h5>
+            <img src="weather/thunderstorm.svg" alt="" class="forecast-item-img" />
+            <h5 class="forecast-item-temp">29 °C</h5>
+          </div>
+        </div>
+      </section>
+
+      <!-- Default View -->
+      <section class="search-city section-message">
+        <img src="message/find.png" alt="Search City" />
+        <div>
+          <h1>Search City</h1>
+          <h4 class="reguler-txt">Find out the weather condition of the city</h4>
+        </div>
+      </section>
+
+      <!-- Not Found -->
+      <section class="not-found section-message" style="display: none;">
+        <img src="message/404.png" alt="Not Found" />
+        <div>
+          <h1>City Not Found</h1>
+          <h4 class="reguler-txt">Please try another city</h4>
+        </div>
+      </section>
+
+      <script src="script.js"></script>
+    </main>
+  </body>
 </html>
