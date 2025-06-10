@@ -1,12 +1,15 @@
 const input = document.querySelector(".city-input");
 const button = document.querySelector(".search-btn");
 const countryText = document.querySelector(".country-txt");
-const dateText = document.querySelector(".current-date-txt.reguler-txt");
+const dateText = document.querySelector(".current-date-txt");
 const tempText = document.querySelector(".temp-txt");
+const sunriseText = document.querySelector(".sunrise");
+const sunsetText = document.querySelector(".sunset");
+const uvText = document.querySelector(".uv");
 const conditionText = document.querySelector(".condition-txt");
 const weatherIcon = document.querySelector(".weather-summary-img");
 const windText = document.querySelector(".wind-value-text");
-const humidityText = document.querySelector(".condition-item:nth-child(1) .condition-info h5:last-child");
+const humidityText = document.querySelector(".humidity");
 
 const weatherInfo = document.querySelector(".weather-info");
 const searchCity = document.querySelector(".search-city");
@@ -46,7 +49,7 @@ function getConditionName(code) {
 function formatDate(date) {
     const options = {
         weekday: "short",
-        year: "numeric",
+        // year: "numeric",
         month: "short",
         day: "numeric",
     };
@@ -65,7 +68,9 @@ async function loadCountries() {
 async function fetchingData(latitude, longitude, countryName) {
     try {
 
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max&timezone=auto`;
+        // const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max&timezone=auto`;
+        // const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,sunrise,sunset,uv_index_max&timezone=auto`;
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,sunrise,sunset,uv_index_max&current=relative_humidity_2m,temperature_2m&timezone=auto`;
         const cardContainer = document.getElementById("card-container");
         const res = await fetch(url);
         const forecast = await res.json();
@@ -75,10 +80,12 @@ async function fetchingData(latitude, longitude, countryName) {
         tempText.textContent = `${forecast.daily.temperature_2m_max[0]} °C`;
         conditionText.textContent = getConditionName(forecast.daily.weather_code[0]);
         weatherIcon.src = getWeatherIcon(forecast.daily.weather_code[0]);
-        humidityText.textContent = `${Math.floor(Math.random() * (90 - 40 + 1)) + 40}%`;
+        sunriseText.textContent = new Date(forecast.daily.sunrise[0]).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        sunsetText.textContent = new Date(forecast.daily.sunset[0]).toLocaleTimeString([], { hour:`2-digit`, minute:`2-digit` });
+        uvText.textContent = `${forecast.daily.uv_index_max[0]}`;
+        humidityText.textContent = `${forecast.current.relative_humidity_2m} %`;
         windText.textContent = `${forecast.daily.wind_speed_10m_max[0]} M/s`;
         
-
         cardContainer.innerHTML = '';
 
         for (let i = 0; i < forecast.daily.time.length; i++) {
