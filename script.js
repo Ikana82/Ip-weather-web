@@ -18,7 +18,7 @@ const notFound = document.querySelector(".not-found");
 let countriesData = [];
 
 const weatherCode = {
-    clear: [0],
+    clear: [0,1 ,2],
     fog: [45, 48],
     drizzle: [51, 53, 55, 56, 57],
     snow: [71, 73, 75, 77, 85, 86],
