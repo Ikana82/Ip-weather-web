@@ -143,7 +143,7 @@ body::before {
 
 .weather-combain {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 6px;
 }
@@ -206,7 +206,7 @@ body::before {
 }
 
 .forecast-items-container::-webkit-scrollbar {
-    height: 8px;
+    height: 6px;
 }
 
 .forecast-items-container::-webkit-scrollbar-track {
@@ -236,8 +236,9 @@ body::before {
 }
 
 .forecast-item-img {
-    width: 35px;
-    height: 35px;
+    width: 42px;
+    height: 50px;
+    margin: 8%;
 }
 
 /* Section : Message */
