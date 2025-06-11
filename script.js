@@ -17,20 +17,20 @@ const notFound = document.querySelector(".not-found");
 
 let countriesData = [];
 
-const weather_code = {
-    clear: [0, 1],
+const weatherCode = {
+    clear: [0],
     fog: [45, 48],
-    drizzle: [56, 57],
-    snow: [71, 73, 75, 77],
-    clouds: [2, 3],
-    rain: [51, 53, 55, 61, 63, 65, 80, 81, 82],
+    drizzle: [51, 53, 55, 56, 57],
+    snow: [71, 73, 75, 77, 85, 86],
+    clouds: [1, 2, 3],
+    rain: [61, 63, 65, 66, 67, 80, 81, 82],
     thunderstorm: [95, 96, 99],
 };
 
 // Fungsi konversi kode cuaca ke ikon
 function getWeatherIcon(code) {
-    for (let condition in weather_code) {
-        if (weather_code[condition].includes(code)) {
+    for (let condition in weatherCode) {
+        if (weatherCode[condition].includes(code)) {
             return `weather/${condition}.svg`;
         }
     }
@@ -38,27 +38,28 @@ function getWeatherIcon(code) {
 }
 
 function getConditionName(code) {
-    for (let condition in weather_code) {
-        if (weather_code[condition].includes(code)) {
+    for (let condition in weatherCode) {
+        if (weatherCode[condition].includes(code)) {
             return condition.charAt(0).toUpperCase() + condition.slice(1);
         }
     }
     return "Unknow";
 }
 
-function formatDate(date) {
-    const options = {
-        weekday: "short",
-        // year: "numeric",
-        month: "short",
-        day: "numeric",
-    };
+function formatDate(date, options) {
+    // const options = {
+    //     weekday: "short",
+    //     year: "numeric",
+    //     month: "short",
+    //     day: "numeric",
+    // };
     return new Date(date).toLocaleDateString("en-US", options);
 }
 
 async function loadCountries() {
     try {
-        const calling = await fetch("country.json");
+        const jsonFile = "country.json";
+        const calling = await fetch(jsonFile);
         countriesData = await calling.json();
     } catch (errorr) {
         console.error("Gagal memuat country.json:", errorr);
@@ -71,12 +72,18 @@ async function fetchingData(latitude, longitude, countryName) {
         // const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max&timezone=auto`;
         // const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,sunrise,sunset,uv_index_max&timezone=auto`;
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,sunrise,sunset,uv_index_max&current=relative_humidity_2m,temperature_2m&timezone=auto`;
-        const cardContainer = document.getElementById("card-container");
         const res = await fetch(url);
         const forecast = await res.json();
 
         countryText.textContent = countryName;
-        dateText.textContent = formatDate(forecast.daily.time[0]);
+        dateText.textContent = formatDate(forecast.daily.time[0], 
+                            {
+                                weekday: "long",
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                             }
+        );
         tempText.textContent = `${forecast.daily.temperature_2m_max[0]} °C`;
         conditionText.textContent = getConditionName(forecast.daily.weather_code[0]);
         weatherIcon.src = getWeatherIcon(forecast.daily.weather_code[0]);
@@ -85,18 +92,23 @@ async function fetchingData(latitude, longitude, countryName) {
         uvText.textContent = `${forecast.daily.uv_index_max[0]}`;
         humidityText.textContent = `${forecast.current.relative_humidity_2m} %`;
         windText.textContent = `${forecast.daily.wind_speed_10m_max[0]} M/s`;
-        
+        const cardContainer = document.getElementById("card-container");
         cardContainer.innerHTML = '';
 
         for (let i = 0; i < forecast.daily.time.length; i++) {
             const date = forecast.daily.time[i];
+            const formatDay = formatDate(date, 
+                            {
+                                weekday: "long"
+                             }
+            );
             const tempMin = forecast.daily.temperature_2m_min[i];
             const code = forecast.daily.weather_code[i];
             const icon = getWeatherIcon(code);
 
             const newList = `
                 <div class="forecast-item">
-                    <h5 class="forecast-item-date reguler-txt">${formatDate(date)}</h5>
+                    <h5 class="forecast-item-date reguler-txt">${formatDay}</h5>
                     <img src="${icon}" alt="weather-icon" class="forecast-item-img" />
                     <h5 class="forecast-item-temp">${tempMin} °C</h5>
                 </div>
