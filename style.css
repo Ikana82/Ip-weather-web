@@ -10,7 +10,7 @@
 }
 
 body {
-    background: url("bg/bg-15.jpg");
+    background: url("bg/bg-18.jpg");
     width: 100%;
     height: 100vh;
     background-size: cover;
@@ -199,7 +199,7 @@ body::before {
 
 .forecast-items-container {
     display: flex;
-    gap: 15px;
+    gap: 10px;
     overflow-x: auto;
     overflow-y: hidden;
     padding-bottom: 12px;
@@ -224,7 +224,7 @@ body::before {
     background: rgb(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     padding: 10px;
     align-items: center;
     border-radius: 12px;
@@ -236,9 +236,8 @@ body::before {
 }
 
 .forecast-item-img {
-    width: 42px;
-    height: 50px;
-    margin: 8%;
+    width: 60px;
+    height: 73px;
 }
 
 /* Section : Message */
