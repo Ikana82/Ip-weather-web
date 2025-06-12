@@ -18,11 +18,11 @@ const notFound = document.querySelector(".not-found");
 let countriesData = [];
 
 const weatherCode = {
-    clear: [0, 1],
+    clear: [0, 1, 2],
     fog: [45, 48],
     drizzle: [51, 53, 55, 56, 57],
     snow: [71, 73, 75, 77, 85, 86],
-    clouds: [2, 3],
+    clouds: [3, 4, 5, 6],
     rain: [61, 63, 65, 66, 67, 80, 81, 82],
     thunderstorm: [95, 96, 99],
 };
