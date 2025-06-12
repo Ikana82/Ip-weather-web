@@ -79,12 +79,12 @@ async function fetchingData(latitude, longitude, countryName) {
         dateText.textContent = formatDate(forecast.daily.time[0], 
                             {
                                 weekday: "long",
-                                year: "numeric",
+                             //   year: "numeric",
                                 month: "short",
                                 day: "numeric",
                              }
         );
-        tempText.textContent = `${forecast.daily.temperature_2m_max[0]} °C`;
+        tempText.textContent = `${forecast.daily.temperature_2m_min[0]} °C`;
         conditionText.textContent = getConditionName(forecast.daily.weather_code[0]);
         weatherIcon.src = getWeatherIcon(forecast.daily.weather_code[0]);
         sunriseText.textContent = new Date(forecast.daily.sunrise[0]).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });

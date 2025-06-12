@@ -70,6 +70,16 @@
     "usa_state": "Connecticut"
   },
   {
+    "country_code": "AMR",
+    "latitude": 51.4367,
+    "longitude": 5.9792,
+    "country": "Amerika",
+    "usa_state_code": "CT",
+    "usa_state_latitude": 41.603221,
+    "usa_state_longitude": -73.087749,
+    "usa_state": "Connecticut"
+  },
+  {
     "country_code": "AN",
     "latitude": 12.226079,
     "longitude": -69.060087,
